@@ -1,0 +1,81 @@
+<div class="container">
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="card">
+                <div class="row">
+                    <form class="row g-3" [formGroup]="productsForm">
+                        <div class="col-auto">
+                        </div>
+                        <div class="col-auto">
+                            <label for="inputPassword2" class="visually-hidden">Nombre</label>
+                            <input type="text" class="form-control" id="inputPassword2"
+                                placeholder="Nombre del producto" formControlName="nombre">
+                        </div>
+                        <div class="col-auto">
+                            <label for="inputPassword2" class="visually-hidden">SKU</label>
+                            <input type="text" class="form-control" id="inputPassword2" 
+                            placeholder="SKU del producto" formControlName="sku">
+                        </div>
+                        <div class="col-2">
+                            <label for="inputPassword2" class="visually-hidden">Precio minimo</label>
+                            <input type="number" class="form-control" id="inputPassword2"
+                                placeholder="Precio minimo del producto" formControlName="precio1">
+                        </div>
+                        <div class="col-2">
+                            <label for="inputPassword2" class="visually-hidden">Precio maximo</label>
+                            <input type="number" class="form-control" id="inputPassword2" formControlName="precio2"
+                                placeholder="Precio maximo del producto">
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary mb-3" (click)="search()">Buscar</button>
+                        </div>
+                        <div class="col-auto">
+                        </div>
+                        <div class="col-auto">
+                        </div>
+                        <div class="col-1">
+                            <div class="input-group mb-3">
+                                <button type="text" class="form-control" data-bs-toggle="tooltip"
+                                    data-bs-placement="left" title="Elementos en el carrito">
+                                    {{cant}}
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">SKU</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let product of products; let i = index">
+                                <th scope="row">{{i+1}}</th>
+                                <td>{{product.nombre}}</td>
+                                <td>{{product.sku}}</td>
+                                <td>{{product.cantidad}}</td>
+                                <td>{{product.precio}}</td>
+                                <td>
+                                    <button class="btn btn-warning" (click)="addToCar()">Añadir al carrito</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

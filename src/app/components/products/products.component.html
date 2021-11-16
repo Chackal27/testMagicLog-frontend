@@ -1,0 +1,104 @@
+<div class="container">
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+                                aria-selected="true">Registrados</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
+                                aria-selected="false">Registrar</button>
+                        </li>
+
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <hr>
+
+                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                            aria-labelledby="pills-home-tab">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">SKU</th>
+                                        <th scope="col">Cantidad</th>
+                                        <th scope="col">Precio</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let product of products; let i = index">
+                                        <th scope="row">{{i+1}}</th>
+                                        <td>{{product.nombre}}</td>
+                                        <td>{{product.sku}}</td>
+                                        <td>{{product.cantidad}}</td>
+                                        <td>{{product.precio}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel"
+                            aria-labelledby="pills-profile-tab">
+                            <form class="form-floating" [formGroup]="productsForm">
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Nombre:</label>
+                                    <input type="text" formControlName="nombre" class="form-control"
+                                        [ngClass]="{'is-invalid':nombre.errors, 'is-valid':!nombre.errors}"
+                                        id="emailLogin" placeholder="Ingrese el nombre del producto">
+                                    <label for="emailLogin" class="text-helper" *ngIf="nombre.errors">Nombre
+                                        incorrecto</label>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">SKU</label>
+                                    <input type="text" formControlName="sku" class="form-control"
+                                        [ngClass]="{'is-invalid':sku.errors, 'is-valid':!sku.errors}"
+                                        id="floatingInputInvalid" placeholder="Ingrese el SKU del producto">
+                                    <label for="floatingInputInvalid" class="text-helper" *ngIf="sku.errors">SKU
+                                        incorrecto</label>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Cantidad:</label>
+                                    <input type="number" formControlName="cantidad" class="form-control"
+                                        [ngClass]="{'is-invalid':cantidad.errors, 'is-valid':!cantidad.errors}"
+                                        id="emailLogin" placeholder="Ingrese la cantidad del producto">
+                                    <label for="emailLogin" class="text-helper" *ngIf="cantidad.errors">Cantidad
+                                        incorrecta</label>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Precio</label>
+                                    <input type="text" formControlName="precio" class="form-control"
+                                        [ngClass]="{'is-invalid':precio.errors, 'is-valid':!precio.errors}"
+                                        id="floatingInputInvalid" placeholder="Ingrese el precio del producto">
+                                    <label for="floatingInputInvalid" class="text-helper" *ngIf="precio.errors">Precio
+                                        incorrecto</label>
+                                </div>
+
+                                <button (click)="createProduct()" class="btn btn-success">Crear</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<swal #errorSwal title="Error" text="Verifica los campos que esten correctos." icon="error" confirmButtonText="Cerrar">
+</swal>
+
+<swal #errorIncorrectSwal text="Algo salio mal, intenta de nuevo." icon="warning" confirmButtonText="Cerrar">
+</swal>
+
+<swal #successSwal text="Producto creado!" icon="success" confirmButtonText="Cerrar" (confirm)="cleanForms()">
+</swal>

@@ -1,0 +1,11 @@
+.center-screen{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.text-helper{
+    font-size:12px;
+    color:red;
+}
